@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
+import axios from 'axios'
 
 const AdminDashboard = () => {
     // const [data, setData] = useState([]);
@@ -24,8 +25,11 @@ const AdminDashboard = () => {
     // }, []);
 
     const handleAction = (name, companyName) => {
-        const socket = io('http://localhost:4000');
-        socket.emit('performAction', { name, companyName });
+        let data = {
+            name,
+            companyName
+        }
+        const response = axios.post('http://localhost:4000/postData', data)
     };
 
     return (

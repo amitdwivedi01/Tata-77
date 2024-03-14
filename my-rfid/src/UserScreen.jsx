@@ -2,22 +2,26 @@ import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import bg from './assets/bg.jpg';
 import './App.css'
+import axios from 'axios';
 
 function UserScreen() {
   const [name, setName] = useState('');
 
-  useEffect(() => {
-    const socket = io('http://localhost:4000'); // Replace 'backend/socket' with your actual WebSocket server URL
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/getData");
+      setName(response.data);
+      console.log(response.data, 'getting data');
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
-    socket.on('dataUpdated', updatedName => {
-      setName(updatedName);
-      console.log(updatedName,'getting data');
-    });
-
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
+  setInterval(() => {
+    // Your function logic here
+    fetchData();
+    console.log('This function runs every 3 seconds');
+  }, 5000);
 
   return (
     <>
@@ -36,8 +40,8 @@ function UserScreen() {
 </div>
 
         <div className="z-10  text-center">
-            <h1 className="text-[95px] absolute top-[330px] left-[550px]  text-[#daa000] font-bold Gotham-Bold m-0 p-0">{name.name}</h1>
-            <p className='text-[55px] absolute top-[450px] left-[700px] text-[#daa000] font-bold Gotham-Bold m-0 p-0'>{name.companyName}</p>
+            <h1 className="text-[95px] absolute top-[330px] left-[550px]  text-[#daa000] font-bold Gotham-Bold m-0 p-0">{name ? name.name : '' }</h1>
+            <p className='text-[55px] absolute top-[450px] left-[700px] text-[#daa000] font-bold Gotham-Bold m-0 p-0'>{name ? name.companyName : ''}</p>
         </div>
 
         </>
