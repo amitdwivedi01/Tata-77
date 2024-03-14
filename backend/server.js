@@ -13,7 +13,7 @@ const app = express();
 //   },
 //   pingTimeout: 80000,
 // });
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(bodyParser.json());
