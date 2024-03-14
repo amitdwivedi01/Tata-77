@@ -13,6 +13,7 @@ const app = express();
 //   },
 //   pingTimeout: 80000,
 // });
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -52,6 +53,6 @@ app.get('/getData', (req, res) => {
   res.json(data);
 });
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(PORT, () => {
     console.log('Server running on port 4000');
 });
