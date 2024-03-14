@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import io from 'socket.io-client';
 import bg from './assets/bg.jpg';
 import './App.css'
 import axios from 'axios';
@@ -9,7 +8,7 @@ function UserScreen() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/getData");
+      const response = await axios.get("https://nice-puce-leopard-hem.cyclic.app/getData");
       setName(response.data);
       console.log(response.data, 'getting data');
     } catch (error) {

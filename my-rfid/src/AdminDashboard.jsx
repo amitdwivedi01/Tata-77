@@ -1,7 +1,6 @@
 // AdminDashboard.js
 
 import React, { useEffect, useState } from 'react';
-import io from 'socket.io-client';
 import axios from 'axios'
 
 const AdminDashboard = () => {
@@ -29,7 +28,7 @@ const AdminDashboard = () => {
             name,
             companyName
         }
-        const response = axios.post('http://localhost:4000/postData', data)
+        const response = axios.post('https://nice-puce-leopard-hem.cyclic.app/postData', data)
     };
 
     return (

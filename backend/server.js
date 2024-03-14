@@ -3,6 +3,7 @@ const http = require('http');
 const socketIo = require('socket.io');
 const cors = require('cors')
 const bodyParser = require('body-parser');
+require('dotenv').config();
 
 const app = express();
 
@@ -53,6 +54,6 @@ app.get('/getData', (req, res) => {
   res.json(data);
 });
 
-app.listen(4000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log('Server running on port 4000');
 });
